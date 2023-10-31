@@ -12,8 +12,14 @@ def get_user_input():
     words = words_input_entry.get()
     chapter = chapter_input_entry.get()
     user_question = user_input_entry.get()
+    age = age_input_entry.get()
+    langauge = langauge_input_entry.get()
 
-    user_result = "create a story that will have " + words + " words and " + chapter + " chapters for " + user_question
+    age_massage = "I am " + age + " old. "
+    langauge_massage = "Explain with " + langauge + " langauge."
+    user_result = (age_massage + langauge_massage + "Now create a story, that will have " + words + " words and "
+                   + chapter + " chapters for " + user_question)
+
     test_model = openai.ChatCompletion.create(model="gpt-3.5-turbo",
                                               messages=[{"role": "user", "content": user_result}])
 
@@ -57,9 +63,8 @@ scrollbar.pack(side="right", fill="y")
 user_input_text.config(yscrollcommand=scrollbar.set)
 
 # Add label for story word.
-words_label = tk.Label(window, text="How many words do you want in the story?", font=("Arial", 20, "bold"))
+words_label = tk.Label(window, text="How many words, do you want in the story?", font=("Arial", 20, "bold"))
 words_label.pack(pady=10)
-
 # Entry user word input.
 words_input_entry = tk.Entry(window, font=("Arial", 14), width=50)
 words_input_entry.pack(padx=10, pady=10)
@@ -67,15 +72,27 @@ words_input_entry.pack(padx=10, pady=10)
 # Add label for chapter.
 chapter_label = tk.Label(window, text="How many chapters do you want?", font=("Arial", 20, "bold"))
 chapter_label.pack(pady=10)
-
 # Entry user chapter input.
 chapter_input_entry = tk.Entry(window, font=("Arial", 14), width=50)
 chapter_input_entry.pack(padx=10, pady=10)
 
+# Add label for age.
+age_label = tk.Label(window, text="How older you.", font=("Arial", 20, "bold"))
+age_label.pack(padx=10, pady=10)
+# Entry for age.
+age_input_entry = tk.Entry(window, font=("Arial", 14), width=30)
+age_input_entry.pack(padx=10,pady=10)
+
+# Add label for age.
+langauge_label = tk.Label(window, text="Which langauge do you want to know?", font=("Arial", 20, "bold"))
+langauge_label.pack(padx=10, pady=10)
+# Entry for age.
+langauge_input_entry = tk.Entry(window, font=("Arial", 14), width=30)
+langauge_input_entry.pack(padx=10,pady=10)
+
 # Add label for user question.
 label = tk.Label(window, text="What story do you want to know?", font=("Arial", 20, "bold"))
 label.pack(pady=10)
-
 # Entry widget to take user input
 user_input_entry = tk.Entry(window, font=("Arial", 14), width=50)
 user_input_entry.pack(padx=10, pady=10)
