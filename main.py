@@ -15,10 +15,10 @@ def get_user_input():
     age = age_input_entry.get()
     langauge = langauge_input_entry.get()
 
-    age_massage = "I am " + age + " old. "
+    age_massage = "I am " + age + " years old. "
     langauge_massage = "Explain with " + langauge + " langauge."
-    user_result = (age_massage + langauge_massage + "Now create a story, that will have " + words + " words and "
-                   + chapter + " chapters for " + user_question)
+    user_result = (age_massage + " Now create a story, that will have exact " + words + " words and "
+                   + chapter + " chapters for " + user_question +' ' + langauge_massage)
 
     test_model = openai.ChatCompletion.create(model="gpt-3.5-turbo",
                                               messages=[{"role": "user", "content": user_result}])
@@ -37,7 +37,7 @@ def get_user_input():
 # Function to save the result to a text file
 def save_result():
     if result_to_save:
-        with open("output.txt", "w") as file:
+        with open("output.txt", "w", encoding="utf-8") as file:
             file.write(result_to_save)
         print("Result saved to 'output.txt'")
 
