@@ -42,7 +42,7 @@ def get_user_input():
 
             for i in range(1, len(dictionary) + 1):
                 per_chapter = dictionary[i]
-                chapter_explanations.append(per_chapter)
+                chapter_explanations.append(f"chapter-{i}>>>>>{per_chapter} \n")
 
                 result = per_chapter + " explain it in 1000 words."
 
@@ -54,7 +54,7 @@ def get_user_input():
                 gpt_result = test_model.choices[0].message.content
                 # print(gpt_result)
 
-                chapter_explanations.append(gpt_result)
+                chapter_explanations.append(f"{gpt_result}\n\n\n")
 
             print(type(chapter_explanations))
 
