@@ -9,16 +9,19 @@ BACKGROUND_COLOR = "#B1DDC6"
 
 # Function to get user input
 def get_user_input():
-    words = words_input_entry.get()
+    # words = words_input_entry.get()
     chapter = chapter_input_entry.get()
     user_question = user_input_entry.get()
     age = age_input_entry.get()
     langauge = langauge_input_entry.get()
+    dropdown_value = selected_dropdown.get()
+    print(dropdown_value)
 
     age_massage = "I am " + age + " years old. "
     langauge_massage = "Explain with " + langauge + " langauge."
-    user_result = (age_massage + " Now create a story, that will have exact " + words + " words and "
-                   + chapter + " chapters for " + user_question +' ' + langauge_massage)
+    user_result = (age_massage + " Now create a" + dropdown_value +
+                   " story, that will have exact 10000 to 15000 words and "
+                   + chapter + " chapters for " + user_question + ' ' + langauge_massage)
 
     test_model = openai.ChatCompletion.create(model="gpt-3.5-turbo",
                                               messages=[{"role": "user", "content": user_result}])
@@ -62,12 +65,39 @@ scrollbar = tk.Scrollbar(frame, command=user_input_text.yview)
 scrollbar.pack(side="right", fill="y")
 user_input_text.config(yscrollcommand=scrollbar.set)
 
-# Add label for story word.
-words_label = tk.Label(window, text="How many words, do you want in the story?", font=("Arial", 20, "bold"))
-words_label.pack(pady=10)
-# Entry user word input.
-words_input_entry = tk.Entry(window, font=("Arial", 14), width=50)
-words_input_entry.pack(padx=10, pady=10)
+
+# # Add label for story word.
+# words_label = tk.Label(window, text="How many words, do you want in the story?", font=("Arial", 20, "bold"))
+# words_label.pack(pady=10)
+# # Entry user word input.
+# words_input_entry = tk.Entry(window, font=("Arial", 14), width=50)
+# words_input_entry.pack(padx=10, pady=10)
+#
+
+
+
+
+
+# Dropdown Menu
+dropdown_label = tk.Label(window, text="Select a Category", font=("Arial", 20, "bold"))
+dropdown_label.pack(pady=10)
+
+# Dropdown Options
+options = ["None", "Fiction", "Non-Fiction", "Educational", "Historical"]
+selected_dropdown = tk.StringVar()
+selected_dropdown.set(options[0])  # Set the default selected option
+
+dropdown_menu = tk.OptionMenu(window, selected_dropdown, *options)
+dropdown_menu.pack()
+
+
+
+
+
+
+
+
+
 
 # Add label for chapter.
 chapter_label = tk.Label(window, text="How many chapters do you want?", font=("Arial", 20, "bold"))
@@ -83,10 +113,10 @@ age_label.pack(padx=10, pady=10)
 age_input_entry = tk.Entry(window, font=("Arial", 14), width=30)
 age_input_entry.pack(padx=10,pady=10)
 
-# Add label for age.
+# Add label for langauge.
 langauge_label = tk.Label(window, text="Which langauge do you want to know?", font=("Arial", 20, "bold"))
 langauge_label.pack(padx=10, pady=10)
-# Entry for age.
+# Entry for langauge.
 langauge_input_entry = tk.Entry(window, font=("Arial", 14), width=30)
 langauge_input_entry.pack(padx=10,pady=10)
 
@@ -96,6 +126,10 @@ label.pack(pady=10)
 # Entry widget to take user input
 user_input_entry = tk.Entry(window, font=("Arial", 14), width=50)
 user_input_entry.pack(padx=10, pady=10)
+
+
+
+
 
 # Button to update the card with user input
 search_button = tk.Button(window, text="Search", command=get_user_input)
