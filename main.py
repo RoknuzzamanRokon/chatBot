@@ -27,7 +27,7 @@ def get_user_input():
                                               messages=[{"role": "user",
                                                          "content": user_result}])
 
-    result_of_title = test_model.choices[0].message.content
+    # result_of_title = test_model.choices[0].message.content
 
     try:
         dictionary = eval(result_of_title)
